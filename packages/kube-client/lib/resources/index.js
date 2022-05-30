@@ -43,7 +43,14 @@ function getResourceGroupMetadata (resources, resourceGroup) {
     .value()
 }
 
-exports.Resources = _.reduce(resourceGroups, getResourceGroupMetadata, {})
+exports.Resources = _.reduce(resourceGroups, getResourceGroupMetadata, {
+  AdminKubeconfigRequest: {
+    name: 'adminkubeconfig',
+    kind: 'AdminKubeconfigRequest',
+    apiVersion: 'authentication.gardener.cloud/v1alpha1',
+    subresource: true
+  }
+})
 
 exports.assign = (object, options) => {
   return Object.assign(object, load(options))
